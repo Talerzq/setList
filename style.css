@@ -1,0 +1,90 @@
+.divBlock {
+    width: 800px;
+    min-height: 400px;
+    padding: 20px;
+    background-color: aliceblue;
+    border: 3px solid black;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px gray;
+    box-sizing: border-box;
+    margin-left: 25%;
+}
+
+.divBlock h2 {
+    text-align: center;
+}
+
+/* Input */
+.inputAdd {
+    width: 220px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 15px;
+}
+
+.inputAdd:focus {
+    border-color: #6c63ff;
+}
+
+/* Przycisk dodawania */
+.buttonAdd {
+    padding: 10px 15px;
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buttonAdd:hover {
+    background-color: #483dcc;
+    transform: scale(1.05);
+}
+
+/* Pojedynczy element listy */
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 8px;
+    transition: 0.3s;
+    overflow-wrap: anywhere;
+}
+
+.item span {
+    flex: 1;
+}
+
+/* Odwrócone kolory */
+.item.odwrocone {
+    background-color: black;
+    color: white;
+}
+
+/* Przyciski przy zadaniu */
+.btn {
+    padding: 7px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+}
+
+.btnUsun {
+    background-color: #e74c3c;
+}
+
+.btnKolory {
+    background-color: #555;
+}
+
+.btn:hover {
+    opacity: 0.75;
+}

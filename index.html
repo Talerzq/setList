@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>SetList</title>
+</head>
+
+<body>
+    <div class="divBlock">
+
+        <h2>Moja lista</h2>
+
+        <div class="addContainer">
+            <input type="text" class="inputAdd" id="inputAdd" placeholder="Wpisz zadanie...">
+            <button class="buttonAdd" onclick="dodaj()">Dodaj</button>
+        </div>
+
+        <div id="lista"></div>
+
+    </div>
+    <script>
+        // Pobieramy elementy HTML
+        const input = document.getElementById("inputAdd");
+        const lista = document.getElementById("lista");
+
+        // Pobieramy zapisane zadania z LocalStorage
+        let zadania = JSON.parse(localStorage.getItem("zadania")) || [];
+
+        // Funkcja zapisująca zadania
+        function zapisz() {
+            localStorage.setItem("zadania", JSON.stringify(zadania));
+        }
+
+        // Funkcja dodająca zadanie
+        function dodaj() {
+
+            // Pobieramy tekst z inputa
+            let tekst = input.value.trim();
+
+            // Sprawdzamy czy pole nie jest puste
+            if (tekst === "") {
+                return;
+            }
+
+            // Dodajemy zadanie do tablicy
+            zadania.push({
+                tekst: tekst,
+                odwrocone: false
+            });
+
+            // Zapisujemy zadania
+            zapisz();
+
+            // Czyścimy input
+            input.value = "";
+
+            // Wyświetlamy listę
+            wyswietl();
+        }
+
+        // Funkcja wyświetlająca zadania
+        function wyswietl() {
+
+            // Czyścimy listę przed wyświetleniem
+            lista.innerHTML = "";
+
+            // Przechodzimy przez wszystkie zadania
+            zadania.forEach((zadanie, index) => {
+
+                // Tworzymy element div
+                let div = document.createElement("div");
+
+                // Nadajemy mu klasę
+                div.className = "item";
+
+                // Sprawdzamy czy kolory mają być odwrócone
+                if (zadanie.odwrocone) {
+                    div.classList.add("odwrocone");
+                }
+
+                // Tworzymy tekst zadania
+                let span = document.createElement("span");
+                span.textContent = zadanie.tekst;
+
+                // Przycisk usuwania
+                let usun = document.createElement("button");
+                usun.textContent = "Usuń";
+                usun.className = "btn btnUsun";
+
+                // Po kliknięciu usuwamy zadanie
+                usun.onclick = function () {
+                    zadania.splice(index, 1);
+                    zapisz();
+                    wyswietl();
+                };
+
+                // Przycisk odwracania kolorów
+                let kolory = document.createElement("button");
+                kolory.textContent = "Było";
+                kolory.className = "btn btnKolory";
+
+                // Po kliknięciu zmieniamy kolory
+                kolory.onclick = function () {
+                    zadania[index].odwrocone = !zadania[index].odwrocone;
+                    zapisz();
+                    wyswietl();
+                };
+
+                // Dodajemy elementy do diva
+                div.appendChild(span);
+                div.appendChild(kolory);
+                div.appendChild(usun);
+
+                // Dodajemy diva do listy
+                lista.appendChild(div);
+
+            });
+        }
+
+        // Wyświetlamy zapisane zadania po uruchomieniu strony
+        wyswietl();
+    </script>
+</body>
+
+</html>
