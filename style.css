@@ -1,8 +1,8 @@
 .divBlock {
-    width: 800px;
+    width: 66%;
     min-height: 400px;
     padding: 20px;
-    background-color: aliceblue;
+    background-color: whitesmoke;
     border: 3px solid black;
     border-radius: 15px;
     box-shadow: 5px 5px 15px gray;
